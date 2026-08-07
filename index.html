@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio 2026 - Technik Programista</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts for futuristic look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="light-mode">
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <div class="custom-cursor-follower" id="custom-cursor-follower"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <span class="loader-text" data-i18n="preloader.text">Inicjalizacja...</span>
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+        </div>
+    </div>
+
+    <!-- WebGL Background -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Header / Navigation -->
+    <header id="header">
+        <div class="logo">
+            <!-- ZMIEN_TUTAJ: Twoje Logo lub Inicjały -->
+            <span class="logo-text">JULES<span class="dot">.</span></span>
+        </div>
+
+        <div class="controls">
+            <!-- Language Toggle -->
+            <div class="lang-toggle" id="lang-toggle">
+                <div class="lang-option active" data-lang="pl">PL</div>
+                <div class="lang-switch-bg"></div>
+                <div class="lang-option" data-lang="en">EN</div>
+            </div>
+
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section id="hero" class="section hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-subtitle" data-i18n="hero.greeting">Cześć, jestem</h2>
+
+                    <!-- ZMIEN_TUTAJ: Twoje Imie i Nazwisko -->
+                    <h1 class="hero-title kinetic-text">
+                        <span class="word">Alex</span>
+                        <span class="word">Dev</span>
+                    </h1>
+
+                    <!-- ZMIEN_TUTAJ: Twój zawód / kierunek studiów -->
+                    <p class="hero-description" data-i18n="hero.role">
+                        Technik Programista & Student IT.<br>
+                        Tworzę cyfrowe doświadczenia nowej generacji.
+                    </p>
+
+                    <a href="#projects" class="btn-primary hover-effect">
+                        <span data-i18n="hero.cta">Zobacz Projekty</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div class="arrow"></div>
+            </div>
+        </section>
+
+        <!-- About & Education Timeline Section -->
+        <section id="about" class="section about-section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="about.title">Edukacja & Rozwój</h2>
+
+                <div class="timeline">
+                    <!-- Timeline Item 1 -->
+                    <div class="timeline-item tilt-card">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-card">
+                            <span class="timeline-date">2021 - 2025</span>
+                            <!-- ZMIEN_TUTAJ: Nazwa szkoły średniej -->
+                            <h3 class="timeline-title" data-i18n="about.edu1.title">Technikum Informatyczne</h3>
+                            <p class="timeline-desc" data-i18n="about.edu1.desc">Uzyskanie tytułu Technika Programisty. Tworzenie pierwszych aplikacji webowych, nauka algorytmiki i baz danych.</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="timeline-item tilt-card">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content glass-card">
+                            <span class="timeline-date">2025 - Obecnie</span>
+                            <!-- ZMIEN_TUTAJ: Nazwa uczelni -->
+                            <h3 class="timeline-title" data-i18n="about.edu2.title">Studia Informatyczne (B.Sc.)</h3>
+                            <!-- ZMIEN_TUTAJ: Uczelnia np. Politechnika Warszawska -->
+                            <h4 class="timeline-subtitle" data-i18n="about.edu2.subtitle">Uniwersytet Technologiczny</h4>
+                            <p class="timeline-desc" data-i18n="about.edu2.desc">Pogłębianie wiedzy z zakresu inżynierii oprogramowania, architektury systemów oraz zaawansowanych technologii webowych.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section id="stack" class="section stack-section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="stack.title">Tech Stack</h2>
+
+                <div class="stack-grid">
+                    <!-- ZMIEN_TUTAJ: Technologie - możesz dodać lub usunąć -->
+                    <div class="stack-item hover-effect">
+                        <span class="stack-icon">⚡</span>
+                        <span class="stack-name">JavaScript (ES2026)</span>
+                    </div>
+                    <div class="stack-item hover-effect">
+                        <span class="stack-icon">⚛️</span>
+                        <span class="stack-name">React / Next.js</span>
+                    </div>
+                    <div class="stack-item hover-effect">
+                        <span class="stack-icon">🎨</span>
+                        <span class="stack-name">Modern CSS & Tailwind</span>
+                    </div>
+                    <div class="stack-item hover-effect">
+                        <span class="stack-icon">🧊</span>
+                        <span class="stack-name">Three.js & WebGL</span>
+                    </div>
+                    <div class="stack-item hover-effect">
+                        <span class="stack-icon">🚀</span>
+                        <span class="stack-name">GSAP & ScrollTrigger</span>
+                    </div>
+                    <div class="stack-item hover-effect">
+                        <span class="stack-icon">🛠️</span>
+                        <span class="stack-name">Git & CI/CD</span>
+                    </div>
+                    <div class="stack-item hover-effect">
+                        <span class="stack-icon">🗄️</span>
+                        <span class="stack-name">Node.js & Databases</span>
+                    </div>
+                    <div class="stack-item hover-effect">
+                        <span class="stack-icon">📱</span>
+                        <span class="stack-name">Responsive Web Design</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Bento Grid Section -->
+        <section id="projects" class="section projects-section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="projects.title">Wybrane Projekty</h2>
+
+                <div class="bento-grid">
+                    <!-- Project 1 (Large) -->
+                    <div class="bento-item bento-large tilt-card glass-card">
+                        <div class="project-content">
+                            <!-- ZMIEN_TUTAJ: Nazwa projektu -->
+                            <h3 class="project-title" data-i18n="projects.p1.title">Nexus E-Commerce</h3>
+                            <p class="project-desc" data-i18n="projects.p1.desc">Platforma sprzedażowa z widokiem produktów 3D i płatnościami krypto.</p>
+                            <div class="project-tags">
+                                <span>Next.js</span>
+                                <span>Three.js</span>
+                                <span>Stripe</span>
+                            </div>
+                            <a href="#" class="project-link" data-i18n="projects.view">Zobacz projekt ➔</a>
+                        </div>
+                        <div class="project-image-placeholder p1-bg"></div>
+                    </div>
+
+                    <!-- Project 2 (Medium) -->
+                    <div class="bento-item bento-medium tilt-card glass-card">
+                        <div class="project-content">
+                            <!-- ZMIEN_TUTAJ: Nazwa projektu -->
+                            <h3 class="project-title" data-i18n="projects.p2.title">AI Task Manager</h3>
+                            <p class="project-desc" data-i18n="projects.p2.desc">Aplikacja do zarządzania czasem wspierana przez LLM.</p>
+                            <div class="project-tags">
+                                <span>React</span>
+                                <span>OpenAI API</span>
+                            </div>
+                            <a href="#" class="project-link" data-i18n="projects.view">Zobacz projekt ➔</a>
+                        </div>
+                        <div class="project-image-placeholder p2-bg"></div>
+                    </div>
+
+                    <!-- Project 3 (Small) -->
+                    <div class="bento-item bento-small tilt-card glass-card">
+                        <div class="project-content">
+                            <!-- ZMIEN_TUTAJ: Nazwa projektu -->
+                            <h3 class="project-title" data-i18n="projects.p3.title">Social Dashboard</h3>
+                            <p class="project-desc" data-i18n="projects.p3.desc">Panel analityczny z zaawansowanymi wykresami Real-time.</p>
+                            <div class="project-tags">
+                                <span>Vue</span>
+                                <span>D3.js</span>
+                            </div>
+                            <a href="#" class="project-link" data-i18n="projects.view">Zobacz projekt ➔</a>
+                        </div>
+                        <div class="project-image-placeholder p3-bg"></div>
+                    </div>
+
+                    <!-- Project 4 (Small) -->
+                    <div class="bento-item bento-small tilt-card glass-card">
+                         <div class="project-content">
+                            <!-- ZMIEN_TUTAJ: Nazwa projektu -->
+                            <h3 class="project-title" data-i18n="projects.p4.title">Creative Agency</h3>
+                            <p class="project-desc" data-i18n="projects.p4.desc">Strona wizytówka oparta o WebGL i Scroll Animations.</p>
+                            <div class="project-tags">
+                                <span>Vanilla JS</span>
+                                <span>GSAP</span>
+                            </div>
+                            <a href="#" class="project-link" data-i18n="projects.view">Zobacz projekt ➔</a>
+                        </div>
+                        <div class="project-image-placeholder p4-bg"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <h2 class="section-title" data-i18n="contact.title">Bądźmy w kontakcie</h2>
+
+                <div class="contact-wrapper glass-card">
+                    <form id="contact-form" class="modern-form">
+                        <div class="form-group">
+                            <input type="text" id="name" required placeholder=" ">
+                            <label for="name" data-i18n="contact.name">Twoje imię</label>
+                            <div class="form-line"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" id="email" required placeholder=" ">
+                            <label for="email" data-i18n="contact.email">Adres e-mail</label>
+                            <div class="form-line"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea id="message" required rows="4" placeholder=" "></textarea>
+                            <label for="message" data-i18n="contact.message">Wiadomość</label>
+                            <div class="form-line"></div>
+                        </div>
+
+                        <!-- ZMIEN_TUTAJ: Ewentualne podpięcie pod system wysyłania e-maili -->
+                        <button type="submit" class="btn-submit hover-effect">
+                            <span data-i18n="contact.send">Wyślij wiadomość</span>
+                            <div class="btn-bg"></div>
+                        </button>
+
+                        <div class="form-status" id="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 <span data-i18n="footer.text">Zaprojektowane z pasją. Wszelkie prawa zastrzeżone.</span></p>
+            <div class="social-links">
+                <!-- ZMIEN_TUTAJ: Twoje linki do profili -->
+                <a href="#" class="hover-effect">GitHub</a>
+                <a href="#" class="hover-effect">LinkedIn</a>
+                <a href="#" class="hover-effect">Twitter/X</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries (CDNs) -->
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Three.js for 3D Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
