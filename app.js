@@ -10,6 +10,13 @@ const translations = {
         "hero.greeting": "Cześć, jestem",
         "hero.role": "Technik Programista & Student IT.<br>Tworzę cyfrowe doświadczenia nowej generacji.",
         "hero.cta": "Zobacz Projekty",
+        "services.title": "Co oferuję",
+        "services.s1.title": "Web Development",
+        "services.s1.desc": "Tworzenie nowoczesnych, szybkich i responsywnych aplikacji webowych.",
+        "services.s2.title": "UI/UX Design",
+        "services.s2.desc": "Projektowanie interfejsów zgodnych z najnowszymi trendami (Glassmorphism, Neumorphism).",
+        "services.s3.title": "Optymalizacja",
+        "services.s3.desc": "Audyty wydajności, SEO i dostosowanie do standardów Core Web Vitals.",
         "about.title": "Edukacja & Rozwój",
         "about.edu1.title": "Technikum Informatyczne",
         "about.edu1.desc": "Uzyskanie tytułu Technika Programisty. Tworzenie pierwszych aplikacji webowych, nauka algorytmiki i baz danych.",
@@ -39,6 +46,13 @@ const translations = {
         "hero.greeting": "Hi, I'm",
         "hero.role": "Software Developer & IT Student.<br>Crafting next-generation digital experiences.",
         "hero.cta": "View Projects",
+        "services.title": "What I Offer",
+        "services.s1.title": "Web Development",
+        "services.s1.desc": "Building modern, fast, and responsive web applications.",
+        "services.s2.title": "UI/UX Design",
+        "services.s2.desc": "Designing interfaces following latest trends (Glassmorphism, Neumorphism).",
+        "services.s3.title": "Optimization",
+        "services.s3.desc": "Performance audits, SEO, and adapting to Core Web Vitals standards.",
         "about.title": "Education & Growth",
         "about.edu1.title": "IT Technical School",
         "about.edu1.desc": "Obtained IT Technician degree. Built first web apps, learned algorithms and databases.",
@@ -424,3 +438,96 @@ if (form) {
         }, 1500);
     });
 }
+
+// --- 7. Terminal Typing Logic ---
+function initTerminal() {
+    const terminalOutput = document.getElementById('terminal-output');
+    if (!terminalOutput) return;
+
+    const commands = [
+        { text: "jules --version", delay: 1000 },
+        { text: "Jules Portfolio v2026.1", type: "output", delay: 500 },
+        { text: "npm start creative-mode", delay: 1500 },
+        { text: "Loading creativity modules...", type: "output", delay: 800 },
+        { text: "Success! Creative mode activated 🚀", type: "output", delay: 500 }
+    ];
+
+    let currentCommand = 0;
+
+    // We start the terminal animation only when it scrolls into view
+    ScrollTrigger.create({
+        trigger: ".terminal-section",
+        start: "top 80%",
+        onEnter: () => {
+            if (currentCommand === 0) runTerminal();
+        },
+        once: true
+    });
+
+    function runTerminal() {
+        if (currentCommand >= commands.length) {
+            // Re-run animation after some time for effect
+            setTimeout(() => {
+                terminalOutput.innerHTML = "";
+                currentCommand = 0;
+                runTerminal();
+            }, 5000);
+            return;
+        }
+
+        const cmd = commands[currentCommand];
+        setTimeout(() => {
+            if (cmd.type === "output") {
+                terminalOutput.innerHTML += `<p>${cmd.text}</p>`;
+                currentCommand++;
+                runTerminal();
+            } else {
+                typeText(cmd.text, 0, () => {
+                    terminalOutput.innerHTML += `<p class="command"><span class="prompt">$</span> ${cmd.text}</p>`;
+                    currentCommand++;
+                    runTerminal();
+                });
+            }
+        }, cmd.delay);
+    }
+
+    function typeText(text, index, callback) {
+        // The visual typing effect is handled by updating a temporary span
+        // We'll simulate typing by updating the prompt line before pushing to output
+        const inputLine = document.querySelector('.terminal-input-line');
+
+        if (index === 0) {
+            let tempSpan = document.createElement('span');
+            tempSpan.id = 'typing-temp';
+            inputLine.insertBefore(tempSpan, inputLine.querySelector('.typing-cursor'));
+        }
+
+        let tempSpan = document.getElementById('typing-temp');
+        if (tempSpan && index < text.length) {
+            tempSpan.innerHTML += text.charAt(index);
+            setTimeout(() => typeText(text, index + 1, callback), 50 + Math.random() * 50);
+        } else {
+            if (tempSpan) tempSpan.remove();
+            callback();
+        }
+    }
+}
+// Add initTerminal to the main initialization function
+const originalInitAnimations = initAnimations;
+initAnimations = function() {
+    originalInitAnimations();
+    initTerminal();
+
+    // Animate Services Grid
+    gsap.from('.service-card', {
+        scrollTrigger: {
+            trigger: '.services-grid',
+            start: "top 80%",
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: "power2.out"
+    });
+};
