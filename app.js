@@ -201,92 +201,6 @@ hoverElements.forEach(el => {
 
 
 // --- 4. WebGL Background (Three.js) ---
-function initThreeJS() {
-    const canvas = document.getElementById('webgl-canvas');
-    if (!canvas) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    // Create Particles
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 800; // Adjust for performance
-    const posArray = new Float32Array(particlesCount * 3);
-
-    for (let i = 0; i < particlesCount * 3; i++) {
-        posArray[i] = (Math.random() - 0.5) * 10;
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-    // Dynamic color based on theme
-    const getParticleColor = () => body.classList.contains('dark-mode') ? 0x6366f1 : 0x4361ee;
-
-    const material = new THREE.PointsMaterial({
-        size: 0.02,
-        color: getParticleColor(),
-        transparent: true,
-        opacity: 0.5,
-        blending: THREE.AdditiveBlending
-    });
-
-    const particlesMesh = new THREE.Points(particlesGeometry, material);
-    scene.add(particlesMesh);
-
-    camera.position.z = 3;
-
-    // Mouse Interaction
-    let targetX = 0;
-    let targetY = 0;
-
-    const windowHalfX = window.innerWidth / 2;
-    const windowHalfY = window.innerHeight / 2;
-
-    document.addEventListener('mousemove', (event) => {
-        targetX = (event.clientX - windowHalfX) * 0.001;
-        targetY = (event.clientY - windowHalfY) * 0.001;
-    });
-
-    // Handle Resize
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // Observe Theme Change to update particle color
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.attributeName === 'class') {
-                material.color.setHex(getParticleColor());
-            }
-        });
-    });
-    observer.observe(body, { attributes: true });
-
-    // Animation Loop
-    const clock = new THREE.Clock();
-
-    function animate() {
-        requestAnimationFrame(animate);
-        const elapsedTime = clock.getElapsedTime();
-
-        // Rotate slowly
-        particlesMesh.rotation.y = elapsedTime * 0.05;
-        particlesMesh.rotation.x = elapsedTime * 0.02;
-
-        // Mouse influence
-        particlesMesh.rotation.y += 0.05 * (targetX - particlesMesh.rotation.y);
-        particlesMesh.rotation.x += 0.05 * (targetY - particlesMesh.rotation.x);
-
-        renderer.render(scene, camera);
-    }
-    animate();
-}
 
 
 // --- 5. Preloader & GSAP Animations ---
@@ -305,7 +219,7 @@ window.addEventListener('load', () => {
                 duration: 0.8,
                 onComplete: () => {
                     preloader.style.display = 'none';
-                    initThreeJS(); // Init heavy 3D after load
+                    initGradient(); // Init interactive gradient bg
                     initAnimations();
                 }
             });
@@ -410,6 +324,21 @@ function initAnimations() {
             card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
             card.style.zIndex = 1;
         });
+
+    initTerminal();
+
+    // Animate Services Grid
+    gsap.from('.service-card', {
+        scrollTrigger: {
+            trigger: '.services-grid',
+            start: "top 80%",
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out"
+    });
     });
 }
 
@@ -436,6 +365,21 @@ if (form) {
                 statusDiv.innerHTML = '';
             }, 3000);
         }, 1500);
+
+    initTerminal();
+
+    // Animate Services Grid
+    gsap.from('.service-card', {
+        scrollTrigger: {
+            trigger: '.services-grid',
+            start: "top 80%",
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out"
+    });
     });
 }
 
@@ -513,21 +457,3 @@ function initTerminal() {
     }
 }
 // Add initTerminal to the main initialization function
-const originalInitAnimations = initAnimations;
-initAnimations = function() {
-    originalInitAnimations();
-    initTerminal();
-
-    // Animate Services Grid
-    gsap.from('.service-card', {
-        scrollTrigger: {
-            trigger: '.services-grid',
-            start: "top 80%",
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: "power2.out"
-    });
-};
